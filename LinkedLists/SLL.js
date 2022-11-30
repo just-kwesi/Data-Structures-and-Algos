@@ -78,6 +78,26 @@ class SinglyLinkedList {
     return this;
   }
 
+  reverse() {
+    if (!this.head.next) {
+      return this;
+    }
+    let first = this.head;
+    let second = first.next;
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+    const temp = this.tail;
+    this.tail = this.head;
+    this.head = temp;
+    this.tail.next = null;
+
+    return this;
+  }
+
   printList() {
     const linkedArray = [];
     let currentNode = this.head;
@@ -98,7 +118,9 @@ myLinkedList.insert(5, "index 1").insert(0, "index 0");
 //['index 0' ,'first now',4,'second',{a:true},'man','index 1']
 myLinkedList.insert(3, "third index");
 //['index 0' ,'first now',4,'third index','second',{a:true},'man','index 1']
+myLinkedList.reverse();
 
+console.log(myLinkedList);
 // console.log(myLinkedList.printList());
 // console.log(myLinkedList);
 // console.log(myLinkedList.printList());
