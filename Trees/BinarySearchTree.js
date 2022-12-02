@@ -37,6 +37,26 @@ class BinarySearchTree {
         } else currentNode = currentNode.left;
       }
     }
+    return this;
+  }
+
+  //lookup
+  lookup(value) {
+    if (!this.root) return false;
+
+    let currentNode = this.root;
+
+    while (!currentNode !== null) {
+      // console.log(`${currentNode.value} and ${value}`);
+      if (value === currentNode.value) return currentNode;
+
+      if (value > currentNode.value) {
+        currentNode = currentNode.right;
+      } else {
+        currentNode = currentNode.left;
+      }
+    }
+    return false;
   }
 }
 
@@ -46,3 +66,4 @@ bst1.insert(4);
 bst1.insert(6);
 bst1.insert(12);
 console.log(bst1);
+console.log(bst1.lookup(6));

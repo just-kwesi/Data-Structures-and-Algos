@@ -42,8 +42,8 @@ class Stack {
   }
 }
 
-let stack = new Stack();
+// let stack = new Stack();
 
-stack.push("name").push("is");
+// stack.push("name").push("is");
 
-console.log(stack.pop(), stack);
+// console.log(stack.pop(), stack);
