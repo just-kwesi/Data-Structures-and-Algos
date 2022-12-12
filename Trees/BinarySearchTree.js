@@ -58,6 +58,10 @@ class BinarySearchTree {
     }
     return false;
   }
+
+  remove(value){
+    
+  }
 }
 
 const bst1 = new BinarySearchTree();
