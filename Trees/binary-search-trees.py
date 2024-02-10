@@ -38,11 +38,38 @@ class BinarySearchTree:
         cur = self.root
         
         while cur:
-            if cur.value == value: return True
+            if cur.value == value: return cur
             elif cur.value > value: cur= cur.left
             else: cur = cur.right
         
         return False
+
+    def findParent(self,value):
+        if not self.root: return False
+        
+        cur = self.root
+        prev = None
+        
+        while cur:
+            if cur.value == value: return prev
+            elif cur.value > value: 
+                prev = cur
+                cur = cur.left
+            else:
+                prev = cur 
+                cur = cur.right
+        
+        return False
+
+    def remove(self,value):
+        # find the node to to reomove
+        nodeToRemove = self.find(value)
+        if not nodeToRemove: return False
+        
+        # replace it with it's successor
+        
+        
+        
     
 
 
