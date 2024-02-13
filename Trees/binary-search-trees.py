@@ -65,8 +65,8 @@ class BinarySearchTree:
         if not node.left:
             return node
 
-    def removeRecursively(self,value):
-        if not self
+    # def removeRecursively(self,value):
+    #     if not self
         
     
     def remove(self,value):
