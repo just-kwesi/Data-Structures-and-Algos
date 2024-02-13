@@ -60,6 +60,10 @@ class BinarySearchTree:
                 cur = cur.right
         
         return False
+    
+    def findSuccessor(self,node):
+        if not node.left:
+            return node
 
     def remove(self,value):
         # find the node to to reomove
@@ -67,7 +71,34 @@ class BinarySearchTree:
         if not nodeToRemove: return False
         
         # replace it with it's successor
+        parent = self.findParent(value)
         
+        # remove if it's a leaf node
+        if not nodeToRemove.left and not nodeToRemove.right:
+            # remove the leaf
+            if parent.left == nodeToRemove:
+                parent.left = None
+            else:
+                parent.right = None
+        # if it only has a right child then just bypass node
+        elif not nodeToRemove.left and nodeToRemove.right:
+            if parent.left == nodeToRemove:
+                parent.left = nodeToRemove.right
+            else:
+                parent.right = nodeToRemove.right
+        
+        # if it only has a left child then just bypass 
+        elif nodeToRemove.left and not nodeToRemove.right:
+            if parent.left == nodeToRemove:
+                parent.left = nodeToRemove.left
+            else:
+                parent.right = nodeToRemove.left
+        
+        # if it has all children find the successor and replace node with it
+        # successor is the smallest value greater than the node in the tree
+        else:
+            self.findSuccessor(nodeToRemove)
+            
         
         
     
