@@ -59,7 +59,36 @@ class BinarySearchTree {
     return false
   }
 
-  remove(value) {}
+  remove(value) {
+    let root = this.root
+
+    if (!root) return root
+
+    function recursiveRemove(node, value) {
+      if (!node) return node
+
+      if (value > node.value) node.right = recursiveRemove(node.right, value)
+      else if (value < node.value) node.left = recursiveRemove(node.left, value)
+      else {
+        if (!node.right) {
+          return node.left
+        } else if (!node.left) {
+          return node.right
+        }
+
+        // find the minimum from the right subtree
+        let cur = node.right
+        while (cur.left) {
+          cur = cur.left
+        }
+        node.value = cur.value
+        node.right = recursiveRemove(node.right, cur.value)
+      }
+      return node
+    }
+
+    return recursiveRemove(root, value)
+  }
 
   breathFirstSearch() {
     let currentNode = this.root
@@ -139,9 +168,14 @@ const bst1 = new BinarySearchTree()
 bst1.insert(10)
 bst1.insert(4)
 bst1.insert(6)
+bst1.insert(8)
 bst1.insert(12)
-console.log(bst1)
-console.log(bst1.breathFirstSearch())
+//
+
+// console.log(bst1)
+// console.log(bst1.breathFirstSearch())
+// console.log(bst1.dfsInorder())
+// console.log(bst1.dfsPostorder())
 console.log(bst1.dfsPreorder())
-console.log(bst1.dfsInorder())
-console.log(bst1.dfsPostorder())
+bst1.remove(6)
+console.log(bst1.dfsPreorder())
