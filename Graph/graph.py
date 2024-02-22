@@ -64,6 +64,26 @@ class Graph:
         
         dfs(vertex)
         return res
+    
+    def dfsIterative(self,start):
+        res = []
+        s = []
+        visited = set()
+        
+        s.append(start)
+        cur_vertex = None
+        while s:
+            cur_vertex = s.pop()
+            
+            if not cur_vertex in visited:
+                res.append(cur_vertex)
+                visited.add(cur_vertex)
+                
+                for neighbour in self.adjacentList[cur_vertex]:
+                    s.append(neighbour)
+        return res
+        
+        
 
 
 
@@ -98,4 +118,8 @@ g.addEdge("E","F")
 g.showConnections()
 
 dpf = g.dfsRecursive("A")
+
+ite = g.dfsIterative('A')
+
 print(dpf)
+print(ite)
