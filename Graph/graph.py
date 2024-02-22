@@ -1,3 +1,5 @@
+from collections import deque
+
 class Graph:
     def __init__(self) -> None:
         self.number_of_vertices = 0
@@ -82,7 +84,27 @@ class Graph:
                 for neighbour in self.adjacentList[cur_vertex]:
                     s.append(neighbour)
         return res
+    
+    def bfs(self,start):
+        queue = deque([start])
+        res = []
+        visited = set()
+        current_vertex = None
         
+        visited.add(start)
+        
+        while queue:
+            current_vertex = queue.popleft()
+            res.append(current_vertex)
+            
+            for neighbor in self.adjacentList[current_vertex]:
+                if not neighbor in visited:
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+                    
+            
+        return res
+            
         
 
 
@@ -115,11 +137,14 @@ g.addEdge("D","E")
 g.addEdge("D","F")
 g.addEdge("E","F")
 
-g.showConnections()
+# g.showConnections()
 
 dpf = g.dfsRecursive("A")
 
 ite = g.dfsIterative('A')
 
+bfs = g.bfs('A')
+
 print(dpf)
 print(ite)
+print(bfs)
