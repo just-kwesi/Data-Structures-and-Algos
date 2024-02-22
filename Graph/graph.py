@@ -33,21 +33,69 @@ class Graph:
     def removeVertex(self,v):
         vertex = self.adjacentList.get(v,None)
         
-        print(self.adjacentList)
+        # print(self.adjacentList)
         if vertex:
             for edge in vertex:
                 self.adjacentList[edge] = [e for e in self.adjacentList[edge] if e != v]
             del self.adjacentList[v]
-        print(self.adjacentList)
+        # print(self.adjacentList)
         
         return vertex
 
+    def showConnections(self):
+        for key in self.adjacentList:
+            connections = ', '.join(self.adjacentList[key])
+            print(f"{key} --> {connections}")
+    
+    def dfsRecursive(self,vertex):
+        res = []
+        visited = set()
+        
+        def dfs(vertex):
+            if not vertex:
+                return None
+            
+            visited.add(vertex)
+            res.append(vertex)
+            
+            for con in self.adjacentList[vertex]:
+                if not con in visited:
+                    dfs(con)
+        
+        dfs(vertex)
+        return res
 
 
-my_graph = Graph()
-my_graph.addVertex("start")
-my_graph.addVertex("second")
-my_graph.addVertex("friedn")
-my_graph.addVertex("start").addEdge('start','second').addEdge('second','friedn')
-# my_graph.removeEdge('second','friedn')
-my_graph.removeVertex('start')
+
+# my_graph = Graph()
+# my_graph.addVertex("start")
+# my_graph.addVertex("second")
+# my_graph.addVertex("friedn")
+# my_graph.addVertex("start").addEdge('start','second').addEdge('second','friedn')
+# # my_graph.removeEdge('second','friedn')
+# my_graph.removeVertex('start')
+
+# my_graph.showConnections()
+
+g = Graph()
+
+g.addVertex("A")
+g.addVertex("B")
+g.addVertex("C")
+g.addVertex("D")
+g.addVertex("E")
+g.addVertex("F")
+
+
+g.addEdge("A", "B")
+g.addEdge("A", "C")
+g.addEdge("B","D")
+g.addEdge("C","E")
+g.addEdge("D","E")
+g.addEdge("D","F")
+g.addEdge("E","F")
+
+g.showConnections()
+
+dpf = g.dfsRecursive("A")
+print(dpf)
