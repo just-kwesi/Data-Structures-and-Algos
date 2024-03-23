@@ -44,10 +44,7 @@ class Graph:
         
         return vertex
 
-    def showConnections(self):
-        for key in self.adjacentList:
-            connections = ', '.join(self.adjacentList[key])
-            print(f"{key} --> {connections}")
+     
     
     def dfsRecursive(self,vertex):
         res = []
